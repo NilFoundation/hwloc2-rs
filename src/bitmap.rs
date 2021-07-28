@@ -157,9 +157,9 @@ impl Bitmap {
     }
 
     pub fn set_or(&mut self, other: &Bitmap) {
-        let bitmap = unsafe { ffi::hwloc_bitmap_alloc_full() };
-        unsafe { ffi::hwloc_bitmap_or(bitmap, self.bitmap, other.bitmap); }
-        self.bitmap = bitmap;
+        let bitmap = Bitmap::new();
+        unsafe { ffi::hwloc_bitmap_or(bitmap.bitmap, self.bitmap, other.bitmap); }
+        self.bitmap = bitmap.bitmap;
     }
 
     /// Remove index `id` from the `Bitmap`.
